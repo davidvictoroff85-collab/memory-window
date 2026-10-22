@@ -4,7 +4,7 @@
 
 A small, local-first evidence inspector. Follow a record to its dependencies, detect missing steps and altered content, and store repeated text once while preserving each separate record.
 
-**Status: working prototype, v0.1.0.** Synthetic demo included. No accounts, telemetry, hosted service, or runtime dependencies. This repository currently has no open-source license; viewing the code does not grant reuse or redistribution rights. Licensing is pending the author's decision.
+**Status: working prototype, v0.1.0.** Synthetic demo included. No accounts, telemetry, hosted service, or runtime dependencies. Licensed under [Apache License 2.0](LICENSE). You may use, modify, and distribute this tool, including commercially, subject to the license terms.
 
 ## Try it
 
