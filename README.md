@@ -4,9 +4,15 @@
 
 A small, local-first evidence inspector. Follow a record to its dependencies, detect missing steps and altered content, and store repeated text once while preserving each separate record.
 
-**Status: working prototype, v0.1.0.** Synthetic demo included. No accounts, telemetry, hosted service, or runtime dependencies. Licensed under [Apache License 2.0](LICENSE). You may use, modify, and distribute this tool, including commercially, subject to the license terms.
+**Status: working prototype, v0.2.0.** Synthetic demo included. No accounts, application telemetry, or runtime dependencies. Licensed under [Apache License 2.0](LICENSE). You may use, modify, and distribute this tool, including commercially, subject to the license terms.
 
 ## Try it
+
+**[Open the browser demo](https://davidvictoroff85-collab.github.io/memory-window/)** — no installation. Start with the missing-evidence AI decision example, inspect the decision and its dependencies, then compare with the complete example. All example records are fictional. Imported files stay in your browser; the hosting provider receives normal page requests.
+
+[Download a versioned release and sample bundles](https://github.com/davidvictoroff85-collab/memory-window/releases).
+
+### Run locally
 
 Requires Node.js 24 or newer.
 

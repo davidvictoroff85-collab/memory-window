@@ -1,6 +1,6 @@
 import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
-const routes = {'/':'demo/index.html','/app.mjs':'demo/app.mjs','/style.css':'demo/style.css','/core.mjs':'core.mjs'};
+const routes = {'/':'demo/index.html','/app.mjs':'demo/app.mjs','/style.css':'demo/style.css','/core.mjs':'core.mjs','/examples.mjs':'examples.mjs'};
 export async function serve(port=4173) {
   const server = createServer(async(req,res)=>{
     const file = routes[req.url];

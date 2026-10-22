@@ -1,4 +1,5 @@
-import {sample,pack,inspect} from '/core.mjs';
+import {decisionExample} from './examples.mjs';
+import {sample,pack,inspect} from './core.mjs';
 const $ = id => document.getElementById(id);
 let bundle;
 function el(tag,text,cls) { const node=document.createElement(tag);node.textContent=text;if(cls)node.className=cls;return node; }
@@ -21,8 +22,10 @@ function detail(id) {
   if(r.source)$('detail').append(el('p','Declared source: '+r.source));
 }
 async function run(fn){try{await fn();}catch(e){$('error').textContent=e.message;}}
+$('decision').onclick=()=>run(async()=>show(await decisionExample()));
+$('evidence-gap').onclick=()=>run(async()=>show(await decisionExample(true)));
 $('complete').onclick=()=>run(async()=>show(await sample()));
 $('missing').onclick=()=>run(async()=>{const b=await sample();await show(await pack(b.records.filter(r=>r.id!=='Q').map(r=>({...r,content:b.blobs[r.blob]})),b.expectedIds));});
 $('tampered').onclick=()=>run(async()=>{const b=await sample();b.blobs[b.records[12].blob]='Altered evidence';await show(b);});
 $('upload').onchange=event=>run(async()=>{const file=event.target.files[0];if(!file)return;if(file.size>2000000)throw Error('Bundle exceeds 2 MB.');await show(JSON.parse(await file.text()));});
-await run(async()=>show(await sample()));
+await run(async()=>show(await decisionExample(true)));

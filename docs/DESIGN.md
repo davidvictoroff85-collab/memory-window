@@ -6,7 +6,7 @@ This format is versioned `memory-window/v1`. It is a prototype format, not a rec
 
 Verification distinguishes invalid integrity, incomplete evidence, and completeness within declared scope. A malicious author can omit evidence and declare a smaller scope. A trusted external manifest digest detects changes relative to that digest; it does not establish factual truth or how that digest became trusted.
 
-The browser uses text nodes rather than interpreting imported HTML. The loopback server serves only four allowlisted assets and does not accept uploads. Input is limited to 2 MB and 500 records. Browser file reads stay local. The server is for local development, not a production internet deployment.
+The browser uses text nodes rather than interpreting imported HTML. The loopback server serves only allowlisted assets and does not accept uploads. Input is limited to 2 MB and 500 records. Browser file reads stay local. The server is for local development, not a production internet deployment.
 
 Public export selects only explicitly public records and their content. It replaces nonpublic dependencies and scope IDs with neutral missing-record IDs. Public content can still quote private material, and record count/topology can reveal information. Human review remains necessary before distribution.
 

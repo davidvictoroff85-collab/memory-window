@@ -16,3 +16,12 @@ test('public export excludes private content and identifiers, preserves a gap',a
 test('exact whitespace and multibyte contents remain distinct',async()=>{const b=await pack([row('A','é'),row('B','é '),row('C','é')]);const r=await inspect(b);assert.equal(r.uniqueContents,2);assert.equal(r.logicalPayloadBytes,7);assert.equal(r.storedPayloadBytes,5);});
 test('loopback server allows only demo assets',async()=>{const server=await serve(0);try{const root='http://127.0.0.1:'+server.address().port;assert.equal((await fetch(root)).status,200);assert.equal((await fetch(root+'/package.json')).status,404);assert.equal((await fetch(root,{method:'POST'})).status,404);assert.match((await fetch(root)).headers.get('content-security-policy'),/connect-src 'none'/);}finally{await new Promise(resolve=>server.close(resolve));}});
 test('CLI protects output and reports invalid bundles with nonzero status',async()=>{const dir=await mkdtemp(join(tmpdir(),'mw-test-'));try{const path=join(dir,'bundle.json');const cli=new URL('../cli.mjs',import.meta.url).pathname;let r=spawnSync(process.execPath,[cli,'sample',path]);assert.equal(r.status,0);r=spawnSync(process.execPath,[cli,'sample',path]);assert.equal(r.status,1);const b=JSON.parse(await readFile(path,'utf8'));b.records.pop();await writeFile(path,JSON.stringify(b));r=spawnSync(process.execPath,[cli,'verify',path]);assert.equal(r.status,1);}finally{await rm(dir,{recursive:true,force:true});}});
+
+ test('AI decision example exposes missing approval evidence',async()=>{
+  const {decisionExample}=await import('../examples.mjs');
+  assert.equal((await inspect(await decisionExample())).status,'complete within declared scope');
+  const bundle=await decisionExample(true), report=await inspect(bundle);
+  assert.deepEqual(report.missing,['EVIDENCE']);
+  assert.ok(bundle.records.find(r=>r.id==='DECISION').parents.includes('EVIDENCE'));
+  assert.match(bundle.blobs[bundle.records.find(r=>r.id==='MODEL').blob],/not a recorded model execution/);
+ });
